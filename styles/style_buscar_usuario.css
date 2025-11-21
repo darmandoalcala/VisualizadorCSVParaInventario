@@ -165,6 +165,8 @@ color: #888;
     margin-top: 10px;
     border-radius: 4px;
     white-space: pre-wrap; /* Respeta saltos de línea y espacios en detalles */
+    align-items: center;
+    text-align: left;
 }
 
 /* --- ESTILOS PARA IMAGEN EN EL MODAL --- */
@@ -182,6 +184,24 @@ color: #888;
     object-fit: contain;
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.modal #editButton{
+    background-color: #2ecc71;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.modal #editButton:hover{
+    background-color: #28b161;
 }
 
 /* --- Footer --- */

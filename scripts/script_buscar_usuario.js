@@ -131,10 +131,7 @@ async function searchInventory() {
     }
 }
 
-// =========================================================
 // RENDERIZADO SIMPLE Y MODAL
-// =========================================================
-
 function renderSimpleTable(data) {
     tbody.innerHTML = '';
 
