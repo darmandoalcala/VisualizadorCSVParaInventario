@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang ="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style_agregar_equipo.css">
+</head>
+<body>
+    <header>
+        <h1>AGREGAR UN NUEVO EQUIPO</h1>
+        <p>Introduce todos los datos.</p>
+    </header>
+    <main class="container">
+
+        <div id="disp-lateral-form">
+            <img src="img/disp/laptop.png">
+        </div>
+
+        <form class="registro-equipo" onsubmit="concatenarLugarDpto(event)">
+            <div class="grupo-horizontal">
+                <div class="campo-individual">
+                    <label for="numserie">1. NUMERO DE SERIE: </label>
+                    <input
+                        type="text"
+                        id="numserie"
+                        name="numserie"
+                        required
+                        placeholder="S/N, ST, SERIALNUM, ETC" 
+                        oninput="this.value = this.value.toUpperCase()"
+                    >
+                </div>
+                
+                <div class="campo-individual">
+                    <label for="disp">2. TIPO DE DISPOSITIVO: </label>
+                    <select id="disp" name="disp" required>
+                        <option value="" disabled selected>TIPO DE EQUIPO</option>
+                        <option value="LAPTOP">LAPTOP</option>
+                        <option value="PC">PC</option>
+                        <option value="MONITOR">MONITOR</option>
+                        <option value="CELULAR">CELULAR</option>
+                        <option value="TECLADO">TECLADO</option>
+                        <option value="MOUSE">MOUSE</option>
+                        <option value="CARGADOR">CARGADOR</option>
+                        <option value="IMPRESORA">IMPRESORA</option>
+                        <option value="OTRO">OTRO</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grupo-horizontal">
+                <div class="campo-individual">
+                    <label for="marca">3. MARCA: </label>
+                    <input
+                        type="text"
+                        id="marca"
+                        name="marca"
+                        required
+                        placeholder="MARCA DEL EQUIPO"
+                        oninput="this.value = this.value.toUpperCase()"
+                    >
+                </div>
+                <div class="campo-individual">
+                    <label for="modelo">3. MODELO: </label>
+                    <input
+                        type="text"
+                        id="modelo"
+                        name="modelo"
+                        required
+                        placeholder="MODELO DEL EQUIPO"
+                        oninput="this.value = this.value.toUpperCase()"
+                    >
+                </div>
+            </div>
+
+            <label class="label-encabezado">5. ¿FUNCIONA?</label> 
+            <div class="grupo-horizontal"> 
+                
+                <div class="campo-individual radio-group">
+                    <div class="radio-opciones">
+                        <input type="radio" id="funciona_si" name="funciona" value="SI" required>
+                        <label for="funciona_si">SI</label>
+                        <input type="radio" id="funciona_no" name="funciona" value="NO">
+                        <label for="funciona_no">NO</label>
+                        <input type="radio" id="funciona_detalle" name="funciona" value="DETALLE">
+                        <label for="funciona_detalle">DETALLE</label>
+                    </div>
+                </div>
+
+                <div class="campo-individual">
+                    <label for="nota">6. DETALLE:</label>
+                    <textarea id="nota" name="nota" rows="3" oninput="this.value = this.value.toUpperCase()"></textarea>
+                </div>
+            </div>
+
+            <label class="label-encabezado">7. PERTENECE A: </label> 
+            <div class="grupo-horizontal">
+                <div class="campo-individual">
+                    <label for="usuario">USUARIO: </label>
+                    <input type="text" id="usuario" name="usuario" required placeholder="NOMBRE APELLIDO" oninput="this.value = this.value.toUpperCase()">
+                </div>
+                
+                <div class="campo-individual">
+                    <label for="lugar_base">LUGAR: </label>
+                    <input type="text" id="lugar_base" name="lugar_base" required placeholder="SUCURSAL" oninput="this.value = this.value.toUpperCase()">
+                </div>
+                
+                <div class="campo-individual">
+                    <label for="dpto_base">DEPARTAMENTO: </label>
+                    <input type="text" id="dpto_base" name="dpto_base" required placeholder="DEPARTAMENTO" oninput="this.value = this.value.toUpperCase()">
+                </div>
+            </div>
+
+            <label class="label-encabezado">8. FECHA DE: </label>
+            <div class="grupo-horizontal">
+                <div class="campo-individual">
+                    <label for="fecha-compra">COMPRA: </label>
+                    <input type="date" id="fecha-compra" name="fecha-compra" required>
+                </div>
+                <div class="campo-individual"> 
+                    <label for="fecha-revisado">REVISADO: </label>
+                    <input type="date" id="fecha-revisado" name="fecha-revisado" required disabled>
+                </div>
+            </div>
+
+            <label class="label-encabezado">9. ¿ESTÁ ACTIVO?</label> 
+            <div class="grupo-horizontal">
+                <div class="campo-individual radio-group"> 
+                    <div class="radio-opciones">
+                        <input type="radio" id="activo_si" name="activo" value="Sí" required>
+                        <label for="activo_si">SI</label>
+                        
+                        <input type="radio" id="activo_no" name="activo" value="No">
+                        <label for="activo_no">NO</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="guardar-equipo">Guardar Equipo</button>
+
+
+        </form>
+    </main>
+    <script src="scripts/script_agregar_equipo.js"></script>
+</body>
+</html>
