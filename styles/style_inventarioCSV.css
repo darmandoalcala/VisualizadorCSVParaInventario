@@ -161,6 +161,16 @@ td:nth-child(10) { /* Selector para la columna ACTIVO (10ª columna en tu ejempl
     margin-right: 5px;
 }
 
+.status-reciente {
+    border-left: 5px solid #155724;
+}
+.status-medio {
+    border-left: 5px solid #ffc107; 
+}
+.status-antiguo {
+    border-left: 5px solid #dc3545;
+}
+
 /* --- Footer --- */
 footer {
     text-align: center;

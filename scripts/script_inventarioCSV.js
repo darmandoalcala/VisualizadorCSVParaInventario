@@ -3,104 +3,111 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const { createClient } = supabase;
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+const columnMapping = {
+    'NUMERO DE SERIE': 'NUMERO DE SERIE', 
+    'MARCA': 'MARCA',
+    'MODELO': 'MODELO',
+    'DISP': 'DISP',
+    'USUARIO': 'USUARIO',
+    'LUGAR_DPTO': 'LUGAR_DPTO',
+    'FECHA COMPRA': 'FECHA COMPRA',
+    'FECHA REVISADO': 'FECHA REVISADO',
+    'FUNCIONA': 'FUNCIONA',
+    'DETALLES': 'DETALLES',
+    'ACTIVO': 'ACTIVO' 
+};
+
 const BRAND_IMAGES = {
-    'LENOVO': 'img/lenovo_logo.png', 
-    'HP': 'img/hp_logo.png',
-    'DELL': 'img/dell_logo.png',
-    'ASUS': 'img/asus_logo.png',
-    'MSI': 'img/msi_logo.png',
-    'ACER': 'img/acer_logo.png',
-    'DEFAULT': 'img/default_logo.png' 
+    'LENOVO': 'img/lenovo_logo.png', 
+    'HP': 'img/hp_logo.png',
+    'DELL': 'img/dell_logo.png',
+    'ASUS': 'img/asus_logo.png',
+    'MSI': 'img/msi_logo.png',
+    'ACER': 'img/acer_logo.png',
+    'DEFAULT': 'img/default_logo.png' 
 };
 
 function calculateDaysAgo(dateString) {
-    if (!dateString || typeof dateString !== 'string' || dateString.length < 8) return 'Sin Registro';
+    if (!dateString || typeof dateString !== 'string' || dateString.length < 8) return 'Sin Registro';
 
-    let dateParts;
-    let reviewDate;
+    let dateParts;
+    let reviewDate;
 
-    // Detectar el formato de fecha:
-    if (dateString.includes('/')) {
-        // Formato: DD/MM/AAAA (Usado en el CSV)
-        dateParts = dateString.split('/');
-        // Crear fecha: new Date(AAAA, MM - 1, DD)
-        reviewDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
-    } else {
-        // Formato: YYYY-MM-DD (Usado en Supabase/ISO)
-        reviewDate = new Date(dateString);
-    }
+    if (dateString.includes('/')) {
+        dateParts = dateString.split('/');
+        reviewDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+    } else {
+        reviewDate = new Date(dateString);
+    }
 
-    // Si la fecha es inválida (ej. texto incorrecto o formato roto)
-    if (isNaN(reviewDate.getTime())) return 'Fecha inválida'; 
+    if (isNaN(reviewDate.getTime())) return 'Fecha inválida'; 
 
-    const today = new Date();
-    // Resetear horas para cálculo exacto de días
-    reviewDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
-    
-    const timeDiff = today.getTime() - reviewDate.getTime();
-    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    
-    if (daysDiff === 0) return 'Hoy';
-    if (daysDiff === 1) return '1 día';
-    return `${daysDiff} días`;
+    const today = new Date();
+    reviewDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    
+    const timeDiff = today.getTime() - reviewDate.getTime();
+    const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+    
+    if (daysDiff < 0) return 'Fecha futura';
+    if (daysDiff === 0) return 'Hoy';
+    if (daysDiff === 1) return '1 día';
+    return `${daysDiff} días`;
 }
 
 const modal = document.getElementById('itemModal');
 const closeButton = document.querySelector('.close-button');
 
 function showModal(data) {
-    const brand = data.MARCA.toUpperCase();
-    const imagePath = BRAND_IMAGES[brand] || BRAND_IMAGES['DEFAULT'];
-    
-    const modalImageContainer = document.getElementById('modal-image-container');
-    modalImageContainer.innerHTML = `<img src="${imagePath}" alt="${data.MARCA} ${data.MODELO}" class="modal-device-image">`;
+    const brand = String(data.MARCA || 'DEFAULT').toUpperCase();
+    const imagePath = BRAND_IMAGES[brand] || BRAND_IMAGES['DEFAULT'];
+    
+    const modalImageContainer = document.getElementById('modal-image-container');
+    modalImageContainer.innerHTML = `<img src="${imagePath}" alt="${data.MARCA} ${data.MODELO}" class="modal-device-image">`;
 
-    document.getElementById('modal-title').textContent = `${data.MARCA} ${data.MODELO} (${data.DISP})`;
-    document.getElementById('modal-subtitle').textContent = `S/N: ${data['NUMERO DE SERIE']}`;
-    
-    document.getElementById('modal-user').textContent = data.USUARIO || 'N/A';
-    document.getElementById('modal-dpto').textContent = data['LUGAR_DPTO'] || 'N/A';
-    
-    // --- FECHA REVISADO ---
-    const fechaRevisado = data['FECHA REVISADO'];
-    document.getElementById('modal-date').textContent = fechaRevisado || 'Desconocido';
-    document.getElementById('modal-days-ago').textContent = calculateDaysAgo(fechaRevisado);
-    
-    // --- FECHA COMPRA ---
-    const fechaCompra = data['FECHA COMPRA'];
-    document.getElementById('modal-buy-date').textContent = fechaCompra || 'Desconocido'; 
-    document.getElementById('modal-buy-days-ago').textContent = calculateDaysAgo(fechaCompra);
+    document.getElementById('modal-title').textContent = `${data.MARCA || 'N/A'} ${data.MODELO || 'N/A'} (${data.DISP || 'N/A'})`;
+    document.getElementById('modal-subtitle').textContent = `S/N: ${data['NUMERO DE SERIE'] || 'N/A'}`;
+    
+    document.getElementById('modal-user').textContent = data.USUARIO || 'N/A';
+    document.getElementById('modal-dpto').textContent = data['LUGAR_DPTO'] || 'N/A';
+    
+    const fechaRevisado = data['FECHA REVISADO'];
+    document.getElementById('modal-date').textContent = fechaRevisado || 'Desconocido';
+    document.getElementById('modal-days-ago').textContent = calculateDaysAgo(fechaRevisado);
+    
+    const fechaCompra = data['FECHA COMPRA'];
+    document.getElementById('modal-buy-date').textContent = fechaCompra || 'Desconocido'; 
+    document.getElementById('modal-buy-days-ago').textContent = calculateDaysAgo(fechaCompra);
 
-    document.getElementById('modal-funciona').textContent = data.FUNCIONA || 'N/A';
-    document.getElementById('modal-details-content').textContent = data.DETALLES || 'Sin detalles';
+    document.getElementById('modal-funciona').textContent = data.FUNCIONA || 'N/A';
+    document.getElementById('modal-details-content').textContent = data.DETALLES || 'Sin detalles';
 
-    modal.style.display = 'block';
+    modal.style.display = 'block';
 }
 
 closeButton.onclick = function() {
-    modal.style.display = 'none';
+    modal.style.display = 'none';
 }
 
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
 }
 
 async function checkAuthAndRedirect() {
-    const messageElement = document.getElementById('message');
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    
-    if (!session) {
-        messageElement.innerHTML = '<i class="fa-solid fa-lock"></i> Debes iniciar sesión para subir datos. Redirigiendo...';
-        if (uploadButton) uploadButton.disabled = true;
-        if (loadButton) loadButton.disabled = true;
+    const messageElement = document.getElementById('message');
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    
+    if (!session) {
+        if (messageElement) messageElement.innerHTML = '<i class="fa-solid fa-lock"></i> Debes iniciar sesión para subir datos. Redirigiendo...';
+        if (uploadButton) uploadButton.disabled = true;
+        if (loadButton) loadButton.disabled = true;
 
-        setTimeout(() => window.location.href = 'index.html', 1500); 
-        return false;
-    }
-    return true;
+        setTimeout(() => window.location.href = 'index.html', 1500); 
+        return false;
+    }
+    return true;
 }
 
 const csvFile = document.getElementById('csvFile');
@@ -109,193 +116,249 @@ const uploadButton = document.getElementById('uploadButton');
 let fileContent = null; 
 
 csvFile.addEventListener('change', function(e) {
-    if (e.target.files.length > 0) {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-            fileContent = evt.target.result; 
-            loadButton.disabled = false;
-        };
-        reader.readAsText(file, 'UTF-8');
-    } else {
-        fileContent = null;
-        loadButton.disabled = true;
-        uploadButton.disabled = true;
-    }
+    if (e.target.files.length > 0) {
+        const file = e.target.files[0];
+        
+        Papa.parse(file, {
+            complete: function(results) {
+                if (results.errors.length) {
+                    console.error('Error al pre-parsear el archivo:', results.errors);
+                    alert('Error al leer el archivo. Revisa el formato.');
+                    fileContent = null;
+                    loadButton.disabled = true;
+                    uploadButton.disabled = true;
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    fileContent = evt.target.result; 
+                    loadButton.disabled = false;
+                };
+                reader.readAsText(file, 'UTF-8');
+            },
+            download: true,
+            preview: 1, 
+            header: true 
+        });
+    } else {
+        fileContent = null;
+        loadButton.disabled = true;
+        uploadButton.disabled = true;
+    }
 });
 
 loadButton.addEventListener('click', function() {
-    if (fileContent) {
-        renderTable(fileContent);
-        loadButton.disabled = true;
-        uploadButton.disabled = false;
-        uploadButton.textContent = 'Subir CSV a Base de Datos';
-    }
+    if (fileContent) {
+        renderTable(fileContent);
+        loadButton.disabled = true;
+        uploadButton.disabled = false;
+        uploadButton.textContent = 'Subir Tabla a Base De Datos';
+    }
 });
 
 function renderTable(csv) {
-    const results = Papa.parse(csv, {
-        header: true,
-        skipEmptyLines: true,
-        delimiter: ';',
-        trimHeaders: true
-    });
+    const results = Papa.parse(csv, {
+        header: true,
+        skipEmptyLines: true,
+        delimiter: '', 
+        trimHeaders: true,
+        dynamicTyping: true, 
+    });
 
-    const headers = results.meta.fields;
-    const data = results.data;
+    if (results.errors.length) {
+        console.error('Errores al parsear para mostrar:', results.errors);
+        alert('Hubo errores al procesar el CSV para la tabla. Revisar consola.');
+        return;
+    }
 
-    const table = document.getElementById('inventoryTable');
-    const thead = table.querySelector('thead');
-    const tbody = table.querySelector('tbody');
+    const headers = results.meta.fields;
+    const data = results.data;
 
-    thead.innerHTML = '';
-    tbody.innerHTML = '';
+    const table = document.getElementById('inventoryTable');
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
 
-    let headerRow = '<tr>';
-    headers.forEach(header => {
-        headerRow += `<th>${header}</th>`;
-    });
-    headerRow += '</tr>';
-    thead.innerHTML = headerRow;
+    thead.innerHTML = '';
+    tbody.innerHTML = '';
 
-    data.forEach(rowDataObject => {
-        if (!rowDataObject['NUMERO DE SERIE']) {
-            return;
-        }
+    let headerRow = '<tr>';
+    headers.forEach(header => {
+        headerRow += `<th>${header}</th>`;
+    });
+    headerRow += '</tr>';
+    thead.innerHTML = headerRow;
 
-        let bodyRow = document.createElement('tr');
+    data.forEach(rowDataObject => {
+        const serialNumber = rowDataObject['NUMERO DE SERIE'];
+        if (!serialNumber || String(serialNumber).trim() === '') {
+            return;
+        }
+
+        let bodyRow = document.createElement('tr');
         
-        bodyRow.addEventListener('click', () => {
-            showModal(rowDataObject);
-        });
-
-        headers.forEach(header => {
-            let cellData = rowDataObject[header] || '';
-            let className = '';
-            let displayData = cellData;
-
-            if (header === 'MARCA') {
-                const brand = cellData.toUpperCase();
-                const imagePath = BRAND_IMAGES[brand] || BRAND_IMAGES['DEFAULT'];
-                displayData = `<img src="${imagePath}" class="brand-icon" alt="${cellData}"> ${cellData}`;
+        const diasRevisado = calculateDaysAgo(rowDataObject['FECHA REVISADO']);
+        if (diasRevisado.includes('días')) {
+            const days = parseInt(diasRevisado.replace(' días', ''), 10);
+            if (days > 730) {
+                bodyRow.classList.add('status-antiguo'); 
+            } else if (days > 365) {
+                bodyRow.classList.add('status-medio'); 
             }
+        } else if (diasRevisado.includes('Hoy') || diasRevisado.includes('1 día')) {
+            bodyRow.classList.add('status-reciente');
+        }
 
-            if (header === 'FUNCIONA') {
-                const value = cellData.toUpperCase();
-                if (value === 'SI') {
-                    className = 'funciona-si';
-                } else if (value === 'DETALLE') {
-                    className = 'funciona-detalle';
-                } else if (value === 'NO') {
-                    className = 'funciona-no';
+        bodyRow.addEventListener('click', () => {
+            showModal(rowDataObject);
+        });
+
+        headers.forEach(header => {
+            let cellData = rowDataObject[header] || '';
+            let className = '';
+            let displayData = cellData;
+
+            if (header === 'MARCA') {
+                const brand = String(cellData).toUpperCase();
+                const imagePath = BRAND_IMAGES[brand] || BRAND_IMAGES['DEFAULT'];
+                displayData = `<img src="${imagePath}" class="brand-icon" alt="${cellData}"> ${cellData}`;
+            }
+
+            if (header === 'FUNCIONA') {
+                const rawValue = String(cellData).toUpperCase().trim();
+                let normalizedValue = '';
+                
+                if (rawValue.includes('SI') || rawValue === '1' || rawValue === 'TRUE') {
+                    normalizedValue = 'SI';
+                } else if (rawValue.includes('NO') || rawValue === '0' || rawValue === 'FALSE') {
+                    normalizedValue = 'NO';
+                } else if (rawValue.includes('DETALLE') || rawValue.includes('AVERIA')) {
+                    normalizedValue = 'DETALLE';
                 }
-            }
 
-            if (header === 'DETALLES' && cellData.length > 0) {
-                className += ' detalles-presente';
-            }
+                if (normalizedValue === 'SI') {
+                    className = 'funciona-si'; 
+                } else if (normalizedValue === 'DETALLE') {
+                    className = 'funciona-detalle'; 
+                } else if (normalizedValue === 'NO') {
+                    className = 'funciona-no'; 
+                }
+            }
 
-            if (header === 'ACTIVO') {
-                const value = cellData.toString();
-                if (value === '1') {
-                    displayData = '<i class="fa-solid fa-circle-check activo-si-icon"></i>';
-                } else if (value === '0') {
-                    displayData = '<i class="fa-solid fa-circle-xmark activo-no-icon"></i>';
-                }
-            }
+            if (header === 'DETALLES' && String(cellData).length > 0) {
+                className += ' detalles-presente';
+            }
 
-            const td = document.createElement('td');
-            td.className = className.trim();
-            td.innerHTML = displayData;
-            bodyRow.appendChild(td);
-        });
-        
-        tbody.appendChild(bodyRow);
-    });
+            if (header === 'ACTIVO') {
+                const value = String(cellData);
+                if (value === '1' || value.toLowerCase() === 'true') {
+                    displayData = '<i class="fa-solid fa-circle-check activo-si-icon"></i>';
+                } else if (value === '0' || value.toLowerCase() === 'false') {
+                    displayData = '<i class="fa-solid fa-circle-xmark activo-no-icon"></i>';
+                }
+            }
+
+            const td = document.createElement('td');
+            td.className = className.trim();
+            td.innerHTML = displayData;
+            bodyRow.appendChild(td);
+        });
+        
+        tbody.appendChild(bodyRow);
+    });
 }
 
 uploadButton.addEventListener('click', function() {
-    if(fileContent){
-        uploadDataToDataBase(fileContent);
-        uploadButton.disabled = true;
-    }
+    if(fileContent){
+        uploadDataToDataBase(fileContent);
+        uploadButton.disabled = true;
+    }
 })
 
 async function uploadDataToDataBase(csv) {
-    if (!await checkAuthAndRedirect()) return;
+    if (!await checkAuthAndRedirect()) return;
 
-    const results = Papa.parse(csv, {
-        header: true,
-        skipEmptyLines: true,
-        delimiter: ';',
-        trimHeaders: true
-    });
+    const results = Papa.parse(csv, {
+        header: true,
+        skipEmptyLines: true,
+        delimiter: '', 
+        trimHeaders: true,
+        dynamicTyping: false
+    });
 
-    const parsedData = results.data;
-    const dataToInsert = [];
+    if (results.errors.length) {
+        console.error('Errores al parsear para subir a BD:', results.errors);
+        alert('Hubo errores al procesar el CSV para la subida. Revisar consola.');
+        return;
+    }
 
-    parsedData.forEach(rowObject => {
-        let cleanObject = {};
+    const parsedData = results.data;
+    const dataToInsert = [];
 
-        for (const headerName in rowObject) {
-            let value = rowObject[headerName];
+    parsedData.forEach(rowObject => {
+        let cleanObject = {};
+        
+        for (const csvHeader in columnMapping) {
+            const dbColumn = columnMapping[csvHeader];
+            let value = rowObject[csvHeader]; 
+            
+            if (value === undefined || value === null || (typeof value === 'string' && String(value).trim() === '')) {
+                value = null;
+            } else if (typeof value === 'string') {
+                value = value.trim();
+            }
 
-            if (value === undefined || value === null || (typeof value === 'string' && value.trim() === '')) {
-                value = null;
-            } else if (typeof value === 'string') {
-                value = value.trim();
-            }
+            if (dbColumn === 'ACTIVO' && value !== null) { 
+                value = (String(value) === '1' || String(value).toLowerCase() === 'true'); 
+            }
 
-            if (headerName.toUpperCase() === 'ID') {
-                continue; 
-            }
+            if ((dbColumn === 'FECHA REVISADO' || dbColumn === 'FECHA COMPRA') && value && typeof value === 'string' && value.includes('/')) {
+                const parts = value.split('/');
+                if (parts.length === 3) {
+                    value = `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`; 
+                } else {
+                    value = null; 
+                }
+            }
 
-            if (headerName.toUpperCase() === 'ACTIVO') {
-                value = value === '1'; 
-            }
-            
-            if (headerName === 'FECHA REVISADO' && value && typeof value === 'string' && value.includes('/')) {
-                const parts = value.split('/');
-                value = `${parts[2]}-${parts[1]}-${parts[0]}`; 
-            }
+            cleanObject[dbColumn] = value;
+        }
 
-            if (headerName === 'FECHA COMPRA' && value && typeof value === 'string' && value.includes('/')) {
-                const parts = value.split('/');
-                value = `${parts[2]}-${parts[1]}-${parts[0]}`; 
-            }
-
-            cleanObject[headerName] = value;
-        }
-
-        if (cleanObject["NUMERO DE SERIE"] !== null) {
-            dataToInsert.push(cleanObject);
-        }
-    });
-    
-    try {
-        const uploadButton = document.getElementById('uploadButton'); 
-        if (uploadButton) {
-            uploadButton.disabled = true; 
-            uploadButton.textContent = 'Subiendo...';
-        }
-
-        const { error } = await supabaseClient
-            .from('inventario')
-            .upsert(dataToInsert, {
-                onConflict: 'NUMERO DE SERIE'
-            });
-
-        if (error) throw error;
-
-        alert(`Base de datos actualizada: ${dataToInsert.length} Equipos actualizados o dados de alta!`);
+        const serial = cleanObject['NUMERO DE SERIE'];
+        if (serial !== null && String(serial).trim() !== '') {
+            dataToInsert.push(cleanObject);
+        }
+    });
+    
+    try {
+        const uploadButton = document.getElementById('uploadButton'); 
+        if (uploadButton) {
+            uploadButton.disabled = true; 
+            uploadButton.textContent = 'Subiendo...';
+        }
         
-    } catch (error) {
-        console.error('Error al subir a Supabase:', error.message);
-        alert('Error al subir los datos: ' + error.message);
-    } finally {
-        if (uploadButton) {
-            uploadButton.disabled = true;
-            uploadButton.textContent = 'Base de datos actualizada!';
+        if (dataToInsert.length === 0) {
+            alert('No hay datos válidos para subir (revisa que el "NUMERO DE SERIE" no esté vacío).');
+            return;
         }
-    }
+
+        const { error } = await supabaseClient
+            .from('inventario')
+            .upsert(dataToInsert, {
+                onConflict: 'NUMERO DE SERIE' 
+            });
+
+        if (error) throw error;
+
+        alert(`Base de datos actualizada: ${dataToInsert.length} Equipos actualizados o dados de alta.`);
+        
+    } catch (error) {
+        console.error('Error al subir a Supabase:', error.message);
+        alert('Error al subir los datos: ' + error.message);
+    } finally {
+        if (uploadButton) {
+            uploadButton.disabled = false;
+            uploadButton.textContent = 'Subir Tabla a Base De Datos';
+        }
+    }
 }
