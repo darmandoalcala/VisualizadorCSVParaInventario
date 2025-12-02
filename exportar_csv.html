@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exportar Inventario - CSV</title>
+    
+    <link rel="stylesheet" href="styles/style_inventarioCSV.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    
+    <style>
+        .export-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh; /* Altura */
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--color-bg-module);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 10px var(--color-shadow-light);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+        
+        #record-count {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: 5px;
+        }
+        
+        #count-description {
+            font-size: 1.2em;
+            color: var(--color-text-secondary);
+            margin-bottom: 30px;
+        }
+
+        #exportButton {
+            background-color: var(--color-func-export, #3fa331); 
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #exportButton:hover {
+            background-color: #48bd39;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EXPORTAR EN CSV</h1>
+        <p>DESCARGA UNA COPIA DE LA BASE DE DATOS EN FORMATO CSV</p>
+    </header>
+
+    <main>
+        <div class="export-container">
+            <div id="loading" class="loading-message">
+                <i class="fa-solid fa-spinner fa-spin"></i> CONECTANDO CON EL SERVIDOR...
+            </div>
+            
+            <span id="record-count">0</span>
+            <span id="count-description">REGISTROS DISPONIBLES PARA DESCARGAR.</span>
+
+            <button id="exportButton" disabled>
+                <i class="fa-solid fa-download"></i> DESCARGAR INVENTARIO
+            </button>
+            <p id="export-message"></p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>BY @DARMANDOALCALA. DATABASE POWERED BY SUPABASE</p>
+    </footer>
+
+    <script src="scripts/script_exportar_csv.js"></script>
+</body>
+</html>

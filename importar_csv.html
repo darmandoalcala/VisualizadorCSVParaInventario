@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV a Tabla - Formato condicional para inventario</title>
+    <title>CSV a Tabla - importar</title>
     <link rel="stylesheet" href="styles/style_inventarioCSV.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -12,18 +12,18 @@
 <body>
 
     <header>
-        <h1>Visualizador CSV</h1>
+        <h1>VISUALIZADOR CSV</h1>
         <p>
-            Selecciona un archivo CSV y luego haz clic en "Cargar Tabla". Haz clic en cualquier fila para ver los detalles.
-            <br/>Haz clic en "Subir Tabla a Base De Datos" para actualizar la tabla en nuestra BD de Supabase.
+            SELECCIONA UN ARCHIVO CSV Y LUEGO HAZ CLIC EN "CARGAR TABLA". HAZ CLIC EN CUALQUIER FILA PARA VER LOS DETALLES.
+            <br/>HAZ CLIC EN "SUBIR TABLA A BASE DE DATOS" PARA ACTUALIZAR LA TABLA EN NUESTRA BD DE SUPABASE.
         </p>
     </header>
 
     <main>
         <section class="csv-upload">
             <input type="file" id="csvFile" accept=".csv">
-            <button id="loadButton" disabled>Cargar Tabla</button>
-            <button id="uploadButton" disabled>Subir Tabla a Base De Datos</button>
+            <button id="loadButton" disabled>CARGAR TABLA</button>
+            <button id="uploadButton" disabled>SUBIR TABLA A BASE DE DATOS</button>
         </section>
 
         <section class="table-container">
@@ -44,33 +44,34 @@
                 <h3 id="modal-subtitle"></h3>
                 <div class="modal-body">
                     <p>
-                        <i class="fa-solid fa-user"></i> Pertenece a: 
+                        <i class="fa-solid fa-user"></i> PERTENECE A: 
                         <strong id="modal-user"></strong>
-                        del departamento 
+                        DEL DEPARTAMENTO 
                         <strong id="modal-dpto"></strong>.
                     </p>
                     <p>
-                        <i class="fa-solid fa-calendar-check"></i> Fecha de Compra: 
+                        <i class="fa-solid fa-calendar-check"></i> FECHA DE COMPRA: 
                         <strong id="modal-buy-date"></strong>
                     </p>
                     <p>
-                        <i class="fa-solid fa-clock-rotate-left"></i> Comprado hace: 
+                        <i class="fa-solid fa-clock-rotate-left"></i> COMPRADO HACE: 
                         <strong id="modal-buy-days-ago"></strong>
                     </p>
                     <p>
-                        <i class="fa-solid fa-calendar-check"></i> Fecha de Revisión: 
+                        <i class="fa-solid fa-calendar-check"></i> FECHA DE INVENTARIADO: 
                         <strong id="modal-date"></strong>
                     </p>
                     <p>
-                        <i class="fa-solid fa-clock-rotate-left"></i> Inventariado hace: 
+                        <i class="fa-solid fa-clock-rotate-left"></i> INVENTARIADO HACE: 
                         <strong id="modal-days-ago"></strong>
                     </p>
                     <hr>
-                    <h4><i class="fa-solid fa-circle-info"></i> Detalles del Estado</h4>
+                    <h4><i class="fa-solid fa-circle-info"></i> DETALLES DEL ESTADO</h4>
                     <p>
-                        Funciona: <strong id="modal-funciona"></strong>
+                        FUNCIONA: <strong id="modal-funciona"></strong>
                     </p>
                     <div id="modal-details-content"></div>
+                    <a href="editar_equipo.html" id="editButton">EDITAR EQUIPO</a>
                 </div>
             </div>
         </div>
@@ -79,6 +80,6 @@
         <p>BY @DARMANDOALCALA. DATABASE POWERED BY SUPABASE</p>
     </footer>
 
-    <script src="scripts/script_inventarioCSV.js"></script>
+    <script src="scripts/script_importar_csv.js"></script>
 </body>
 </html>

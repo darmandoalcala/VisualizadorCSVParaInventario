@@ -13,29 +13,29 @@
 <body>
 
     <header>
-        <h1>Búsqueda de Equipos por Usuario/Departamento 🔍</h1>
-        <p>Introduce el nombre del usuario o departamento para ver sus equipos asignados.</p>
+        <h1>BÚSQUEDA DE EQUIPOS</h1>
+        <p>INTRODUCE EL NOMBRE DEL COLABORADOR O DEL DEPARTAMENTO PARA VER LOS EQUIPOS ASIGNADOS.</p>
     </header>
 
     <main>
         <section id="search-input-area">
             <input type="text" id="searchInput" placeholder="Nombre de Usuario o Departamento" aria-label="Campo de búsqueda de usuario">
-            <button id="searchButton">Buscar Equipos</button>
+            <button id="searchButton">BUSCAR EQUIPOS</button>
         </section>
 
         <section id="results-display">
-            <h2>Resultados de la Búsqueda</h2>
+            <h2>RESULTADOS DE LA BUSQUEDA</h2>
             
             <div id="loadingMessage">
-                Introduce un término y haz clic en Buscar.
+                INTRODUCE UN TERMINO Y HAZ CLIC EN BUSCAR.
             </div>
 
             <table id="inventoryTable" class="simple-results">
                 <thead>
                     <tr>
-                        <th>Nombre del Usuario</th>
-                        <th>Ubicación / Departamento</th>
-                        <th>Número de Serie</th>
+                        <th>NOMBRE DEL USUARIO</th>
+                        <th>LUGAR / DEPARTAMENTO</th>
+                        <th>NUMERO DE SERIE</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,34 +54,34 @@
                 <h3 id="modal-subtitle"></h3>
                 <div class="modal-body">
                     <p>
-                        <i class="fa-solid fa-user"></i> Pertenece a: 
+                        <i class="fa-solid fa-user"></i> PERTENECE A: 
                         <strong id="modal-user"></strong>
-                        del departamento 
+                        DEL DEPARTAMENTO 
                         <strong id="modal-dpto"></strong>.
                     </p>
                     <p>
-                        <i class="fa-solid fa-calendar-check"></i> Fecha de Compra: 
+                        <i class="fa-solid fa-calendar-check"></i> FECHA DE COMPRA: 
                         <strong id="modal-buy-date"></strong>
                     </p>
                     <p>
-                        <i class="fa-solid fa-clock-rotate-left"></i> Comprado hace: 
+                        <i class="fa-solid fa-clock-rotate-left"></i> COMPRADO HACE: 
                         <strong id="modal-buy-days-ago"></strong>
                     </p>
                     <p>
-                        <i class="fa-solid fa-calendar-check"></i> Fecha de Revisión: 
+                        <i class="fa-solid fa-calendar-check"></i> FECHA DE INVENTARIADO: 
                         <strong id="modal-date"></strong>
                     </p>
                     <p>
-                        <i class="fa-solid fa-clock-rotate-left"></i> Inventariado hace: 
+                        <i class="fa-solid fa-clock-rotate-left"></i> INVENTARIADO HACE: 
                         <strong id="modal-days-ago"></strong>
                     </p>
                     <hr>
-                    <h4><i class="fa-solid fa-circle-info"></i> Detalles del Estado</h4>
+                    <h4><i class="fa-solid fa-circle-info"></i> DETALLES DEL ESTADO</h4>
                     <p>
-                        Funciona: <strong id="modal-funciona"></strong>
+                        FUNCIONA: <strong id="modal-funciona"></strong>
                     </p>
                     <div id="modal-details-content"></div>
-                    <a href="editar_equipo.html" id="editButton">Editar Equipo</a>
+                    <a href="editar_equipo.html" id="editButton">EDITAR EQUIPO</a>
                 </div>
             </div>
         </div>
