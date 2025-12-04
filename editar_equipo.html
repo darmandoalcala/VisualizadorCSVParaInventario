@@ -1,29 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang ="es">
 <head>
     <meta charset="UTF-8">
-    <title>Próximamente</title>
-    <link rel="stylesheet" href="styles/01_styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/01_styles.css"> 
+    <link rel="stylesheet" href="styles/style_agregar_equipo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <style>
-
-        .container {
-            text-align: center;
-            background-color: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-        }
-
-        p {
-            font-size: 1em;
-            color: #555;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-
 <body>
+
     <header>
         <div id="header-left-actions">
             <a href="index.html" 
@@ -34,20 +21,131 @@
         </div>
 
         <div id="header-titles">
-            <h1>EDITAR EQUIPO</h1>
-                <p>EDITA EL EQUIPO SELECCIONADO</p>
+            <h1>EDITAR UN EQUIPO</h1>
+            <p>MODIFICA LOS DATOS QUE GUSTES</p>
         </div>
         
         <div id="header-right-spacer">
         </div>
     </header>
 
-    <div class="container">
-        <h1>🚧 Próximamente 🚧</h1>
-        <p>Fecha estimada de función: <br/> 17/06/2082.</p>
-    </div>
+    <main class="container">
+
+        <div id="disp-lateral-form">
+            <img src="img/disp/DEFAULT.png">
+        </div>
+
+        <form class="registro-equipo" id="equipoForm"> 
+            <div class="grupo-horizontal">
+                <div class="campo-individual">
+                    <label for="numserie">1. NUMERO DE SERIE: </label>
+                    <input
+                        type="text"
+                        id="numserie"
+                        name="NUMERO DE SERIE"  required
+                        placeholder="S/N, ST, SERIALNUM, ETC" 
+                        oninput="this.value = this.value.toUpperCase()"
+                        readonly
+                    >
+                </div>
+                
+                <div class="campo-individual">
+                    <label for="disp">2. TIPO DE DISPOSITIVO: </label>
+                    <input 
+                        type="text" 
+                        id="disp" 
+                        name="DISP" 
+                        required 
+                        readonly 
+                        placeholder="Tipo de dispositivo"
+                        value="LAPTOP" 
+                    >
+                </div>
+            </div>
+            <div class="grupo-horizontal">
+                <div class="campo-individual">
+                    <label for="marca">3. MARCA: </label>
+                    <input
+                        type="text"
+                        id="marca"
+                        name="MARCA" required
+                        placeholder="MARCA DEL EQUIPO"
+                        oninput="this.value = this.value.toUpperCase()"
+                        readonly
+                    >
+                </div>
+                <div class="campo-individual">
+                    <label for="modelo">3. MODELO: </label>
+                    <input
+                        type="text"
+                        id="modelo"
+                        name="MODELO" required
+                        placeholder="MODELO DEL EQUIPO"
+                        oninput="this.value = this.value.toUpperCase()"
+                        readonly
+                    >
+                </div>
+            </div>
+
+            <label class="label-encabezado">5. ¿FUNCIONA?</label> 
+            <div class="grupo-horizontal"> 
+                
+                <div class="campo-individual radio-group">
+                    <div class="radio-opciones">
+                        <input type="radio" id="funciona_si" name="FUNCIONA" value="SI" required> <label for="funciona_si">SI</label>
+                        <input type="radio" id="funciona_no" name="FUNCIONA" value="NO"> <label for="funciona_no">NO</label>
+                        <input type="radio" id="funciona_detalle" name="FUNCIONA" value="DETALLE"> <label for="funciona_detalle">DETALLE</label>
+                    </div>
+                </div>
+
+                <div class="campo-individual">
+                    <label for="nota">6. DETALLES:</label>
+                    <textarea id="nota" name="DETALLES" rows="3" oninput="this.value = this.value.toUpperCase()"></textarea> </div>
+            </div>
+
+            <label class="label-encabezado">7. PERTENECE A: </label> 
+            <div class="grupo-horizontal">
+                <div class="campo-individual">
+                    <label for="usuario">USUARIO: </label>
+                    <input type="text" id="usuario" name="USUARIO" required placeholder="NOMBRE APELLIDO" oninput="this.value = this.value.toUpperCase()"> </div>
+                
+                <div class="campo-individual">
+                    <label for="lugar_dpto">LUGAR_DPTO: </label>
+                    <input type="text" id="lugar_dpto" name="LUGAR_DPTO" required placeholder="GP-LUGAR/DEPARTAMENTO" oninput="this.value = this.value.toUpperCase()"> 
+                </div>
+            </div>
+            
+            <label class="label-encabezado">8. FECHA DE: </label>
+            <div class="grupo-horizontal">
+                <div class="campo-individual">
+                    <label for="fecha-compra">COMPRA: </label>
+                    <input type="date" id="fecha-compra" name="FECHA COMPRA"> </div>
+                <div class="campo-individual"> 
+                    <label for="fecha-revisado">REVISADO: </label>
+                    <input type="date" id="fecha-revisado" name="FECHA REVISADO" required readonly> </div>
+            </div>
+
+            <label class="label-encabezado">9. ¿ESTÁ ACTIVO?</label> 
+            <div class="grupo-horizontal">
+                <div class="campo-individual radio-group"> 
+                    <div class="radio-opciones">
+                        <input type="radio" id="activo_si" name="ACTIVO" value="TRUE" required> <label for="activo_si">SI</label>
+                        
+                        <input type="radio" id="activo_no" name="ACTIVO" value="FALSE"> <label for="activo_no">NO</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="guardar-equipo">Guardar Equipo</button>
+
+
+        </form>
+    </main>
+
     <footer>
         <p>BY @DARMANDOALCALA. DATABASE POWERED BY SUPABASE</p>
     </footer>
+    
+    <script src="scripts/script_editar_equipo.js"></script>
 </body>
 </html>

@@ -53,6 +53,7 @@ function initializeGlobalModalListeners() {
  * @param {Object} data - Objeto JSON del registro del equipo.
  */
 
+
 function showGlobalModal(data) {
     const modal = document.getElementById('itemModal');
     if (!modal) return;
@@ -86,27 +87,27 @@ function showGlobalModal(data) {
         editButton.onclick = () => {
             handleEditRedirect(serialNumber);
         };
-        editButton.style.display = 'inline-block'; 
+        editButton.disabled = false;
+        editButton.style.display = 'inline-block';
     }
 
     modal.style.display = 'block';
 }
 
 /**
- * Redirige a la página de edición, pasando el número de serie del equipo actual.
+ * Maneja la redirección a la página de edición, pasando el serial.
  * @param {string} serialNumber - El número de serie del equipo a editar.
  */
 function handleEditRedirect(serialNumber) {
-    if (!serialNumber) {
-        alert("Error: No se pudo obtener el Número de Serie para la edición.");
-        return;
+    if (serialNumber) {
+        // Cierra el modal antes de redirigir (buena práctica)
+        closeGlobalModal();
+        
+        const editPageUrl = `editar_equipo.html?serial=${encodeURIComponent(serialNumber)}`;
+        window.location.href = editPageUrl;
+    } else {
+        alert("Error: Número de Serie no disponible para editar.");
     }
-    
-    // Aquí puedes definir la ruta a tu página de edición
-    const editPageUrl = `editar_equipo.html?serial=${encodeURIComponent(serialNumber)}`;
-    
-    // Redirigir al usuario
-    window.location.href = editPageUrl;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
