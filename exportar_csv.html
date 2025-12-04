@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exportar Inventario - CSV</title>
     
-    <link rel="stylesheet" href="styles/style_inventarioCSV.css">
+    <link rel="stylesheet" href="styles/01_styles.css"> 
+    <link rel="stylesheet" href="styles/style_vista_inventario.css">
+    <link rel="stylesheet" href="styles/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -28,19 +30,8 @@
             margin: 50px auto;
         }
         
-        #record-count {
-            font-size: 3em;
-            font-weight: 700;
-            color: var(--color-text-dark);
-            margin-bottom: 5px;
-        }
         
-        #count-description {
-            font-size: 1.2em;
-            color: var(--color-text-secondary);
-            margin-bottom: 30px;
-        }
-
+        
         #exportButton {
             background-color: var(--color-func-export, #3fa331); 
             color: white;
@@ -53,24 +44,36 @@
             transition: all 0.2s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        
+        #record-count{font-size:3em;font-weight:700;color:var(--color-text-dark);margin-bottom:5px;}
+        #count-description{font-size:1.2em;color:var(--color-text-secondary);margin-bottom:30px;}
+        #exportButton:hover{filter:contrast(175%) brightness(103%);transform:translateY(-15px);}
 
-        #exportButton:hover {
-            background-color: #48bd39;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>EXPORTAR EN CSV</h1>
-        <p>DESCARGA UNA COPIA DE LA BASE DE DATOS EN FORMATO CSV</p>
-    </header>
+    <header>
+        <div id="header-left-actions">
+            <a href="index.html" 
+                id="back-to-menu-btn" 
+                style="font-size: 1em;">
+                <i class="fa-solid fa-arrow-left"></i> 
+            </a>
+        </div>
+
+        <div id="header-titles">
+            <h1>EXPORTAR EN CSV</h1>
+            <p>DESCARGA UNA COPIA DE LA BASE DE DATOS EN FORMATO CSV</p>
+        </div>
+        
+        <div id="header-right-spacer">
+        </div>
+    </header>
 
     <main>
         <div class="export-container">
-            <div id="loading" class="loading-message">
+            <div id="loading">
                 <i class="fa-solid fa-spinner fa-spin"></i> CONECTANDO CON EL SERVIDOR...
             </div>
             

@@ -1,0 +1,35 @@
+/* --- Estilos Generales --- */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#f4f7f6;color:#333;margin:0;padding:20px;}
+#header-titles{flex-grow:1;text-align:center;margin:0;}
+#header-left-actions{text-align:left;}
+#header-left-actions a{background-color:#e74c3c;color:white;padding:8px 15px;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9em;transition:background-color 0.2s ease,transform 0.2s;display:inline-block;}
+#header-left-actions a:hover{filter:contrast(175%) brightness(103%);transform:translateY(-10px);}
+#header-right-spacer{background-color:transparent;width:36px;height:36px;display:block;padding:0;margin:0;box-shadow:none;border:none;}
+
+header h1{color:#2c3e50;font-size:2em;margin:0;}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1{color:#2c3e50;font-size:2em;margin:0;}
+
+#loadingMessage, #loading{text-align:center;padding:20px;color:#888;}
+
+footer{text-align:center;margin-top:40px;padding:10px;color:#7f8c8d;font-size:0.9em;}
+

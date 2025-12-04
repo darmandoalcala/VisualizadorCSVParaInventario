@@ -3,14 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="styles/01_styles.css"> 
     <link rel="stylesheet" href="styles/style_agregar_equipo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+
     <header>
-        <h1>AGREGAR UN NUEVO EQUIPO</h1>
-        <p>INTRODUCE TODOS LOS DATOS.</p>
+        <div id="header-left-actions">
+            <a href="index.html" 
+                id="back-to-menu-btn" 
+                style="font-size: 1em;">
+                <i class="fa-solid fa-arrow-left"></i> 
+            </a>
+        </div>
+
+        <div id="header-titles">
+            <h1>AGREGAR UN NUEVO EQUIPO</h1>
+            <p>INTRODUCE TODOS LOS DATOS.</p>
+        </div>
+        
+        <div id="header-right-spacer">
+        </div>
     </header>
+
     <main class="container">
 
         <div id="disp-lateral-form">
@@ -127,6 +145,11 @@
 
         </form>
     </main>
+
+    <footer>
+        <p>BY @DARMANDOALCALA. DATABASE POWERED BY SUPABASE</p>
+    </footer>
+    
     <script src="scripts/script_agregar_equipo.js"></script>
 </body>
 </html>

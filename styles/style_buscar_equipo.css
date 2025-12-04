@@ -1,0 +1,10 @@
+#search-input-area{text-align:center;margin-bottom:30px;}
+#searchInput{padding:10px;width:300px;border:1px solid #ccc;border-radius:4px;font-size:1em;margin-right:10px;}
+#searchButton{padding:10px 20px;background-color:#3498db;color:white;border:none;border-radius:4px;cursor:pointer;transition:background-color 0.3s;}
+#searchButton:hover{background-color:#2980b9;}
+h2{width: 100%; text-align: center;}
+#inventoryTable {width:80%;margin:20px auto;border-collapse:collapse;font-size:1.1em;box-shadow:0 4px 8px rgba(0,0,0,0.1);}
+#inventoryTable  th{background-color:#ecf0f1;color:#2c3e50;padding:12px;text-align:left;border-bottom:2px solid #bdc3c7;}
+#inventoryTable  td{padding:10px;border-bottom:1px solid #eee;}
+#inventoryTable  tbody tr:nth-child(even){background-color:#f9f9f9;}
+#inventoryTable  tbody tr:hover{background-color:#e6f7ff;cursor:pointer;}

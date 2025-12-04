@@ -1,26 +1,3 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #eef2f5;
-    color: #333;
-    margin: 0;
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-}
-
-h1 {
-    color: #1c4b75;
-    font-size: 2.2em;
-    margin: 0;
-}
-
 .container {
     align-items: stretch;
     display: flex;
@@ -53,13 +30,13 @@ h1 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.registro-equipo select, 
-.registro-equipo textarea, 
-.registro-equipo input[type="text"], 
+.registro-equipo select,
+.registro-equipo textarea,
+.registro-equipo input[type="text"],
 .registro-equipo input[type="date"] {
     width: 100%;
     padding: 10px 15px;
-    margin-top: 5px; 
+    margin-top: 5px;
     border: 1px solid #ccc;
     background-color: #ffffff;
     color: #333;
@@ -74,15 +51,15 @@ h1 {
     color: #333 !important;
 }
 
-.registro-equipo select option:checked, 
+.registro-equipo select option:checked,
 .registro-equipo select option:focus {
-    background-color: #e0f0ff; 
+    background-color: #e0f0ff;
     color: #1c4b75;
 }
 
-.registro-equipo select:focus, 
-.registro-equipo textarea:focus, 
-.registro-equipo input[type="text"]:focus, 
+.registro-equipo select:focus,
+.registro-equipo textarea:focus,
+.registro-equipo input[type="text"]:focus,
 .registro-equipo input[type="date"]:focus {
     border-color: #1c4b75;
     outline: none;
@@ -90,7 +67,7 @@ h1 {
 
 .registro-equipo label {
     display: block;
-    font-weight: 600; 
+    font-weight: 600;
     color: #333;
     margin-bottom: 5px;
 }
@@ -102,11 +79,11 @@ h1 {
 }
 
 .campo-individual {
-    flex: 1; 
+    flex: 1;
 }
 
 .label-encabezado {
-    margin-bottom: 8px; 
+    margin-bottom: 8px;
     display: block;
     color: #1c4b75;
     font-size: 1.2em;
@@ -115,8 +92,8 @@ h1 {
 }
 
 .radio-group {
-    flex-grow: 0; 
-    width: fit-content; 
+    flex-grow: 0;
+    width: fit-content;
     min-width: 250px;
 }
 
@@ -137,7 +114,7 @@ h1 {
 }
 
 .guardar-equipo {
-    background-color: #00bf8f; 
+    background-color: #00bf8f;
     background: linear-gradient(to right, #00a87a, #008f65);
     color: white;
     padding: 15px 20px;
@@ -148,7 +125,7 @@ h1 {
     font-weight: bold;
     text-transform: uppercase;
     width: 100%;
-    margin-top: 30px; 
+    margin-top: 30px;
     transition: background 0.3s, transform 0.1s;
 }
 

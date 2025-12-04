@@ -1,120 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VISTA DE INVENTARIO</title>
-    
-    <link rel="stylesheet" href="styles/style_vista_inventario.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <style>
-        .loading-message {
-            text-align: center;
-            padding: 50px;
-            font-size: 1.5em;
-            color: #7f8c8d;
-        }
-
-        .table-container {
-            margin: 20px auto;
-            max-width: 95%; 
-        }
-
-        #inventoryTable tbody tr:hover {
-            background-color: #d8f5e6; 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            transform: scale(1.005);
-            transition: all 0.2s ease;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISTA DE INVENTARIO</title>
+    
+    <link rel="stylesheet" href="styles/01_styles.css">
+    <link rel="stylesheet" href="styles/style_vista_inventario.css">
+        <link rel="stylesheet" href="styles/modal.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/global_modal_control.js"></script> 
 </head>
 <body>
 
-        <header>
-            <div id="header-left-actions">
-                <a href="index.html" 
-                    id="back-to-menu-btn" 
-                    style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 8px; font-size: 1em; cursor: pointer; text-decoration: none; display: inline-block;">
-                    <i class="fa-solid fa-arrow-left"></i> 
-                </a>
-            </div>
+    <header>
+        <div id="header-left-actions">
+            <a href="index.html" 
+                id="back-to-menu-btn" 
+                style="font-size: 1em;">
+                <i class="fa-solid fa-arrow-left"></i> 
+            </a>
+        </div>
 
-            <div id="header-titles">
-                <h1>INVENTARIO DE EQUIPOS</h1>
-                <p>VISTA DE SOLO LECTURA Y EN TIEMPO REAL</p>
-            </div>
-            
-            <div id="header-right-spacer"></div>
-        </header>
+        <div id="header-titles">
+            <h1>INVENTARIO DE EQUIPOS</h1>
+            <p>VISTA DE SOLO LECTURA Y EN TIEMPO REAL</p>
+        </div>
+        
+        <div id="header-right-spacer">
+        </div>
+    </header>
 
-    <main>
-        <div class="action-bar" style="text-align: center; margin-bottom: 20px;">
-            
-            <button id="crear-historial-button" 
+    <main>
+        <div class="action-bar">
+            <button id="crear-historial-button"
                     style="background-color: #E67E22; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 1em; cursor: pointer;">
                 <i class="fa-solid fa-file-invoice"></i> CREAR HISTORIAL DE INCIDENTES
             </button>
         </div>
-        <div class="table-container">
-            <div id="loading" class="loading-message">
-                <i class="fa-solid fa-spinner fa-spin"></i> Cargando datos del inventario...
-            </div>
-            <table id="inventoryTable">
-                <thead></thead>
-                <tbody></tbody>
-            </table>
-        </div>
-    </main>
-    
-    <div id="itemModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div id="modal-details">
-                <div id="modal-image-container"></div>
-                
-                <h2 id="modal-title"></h2>
-                <h3 id="modal-subtitle"></h3>
-                <div class="modal-body">
-                    <p>
-                        <i class="fa-solid fa-user"></i> Pertenece a: 
-                        <strong id="modal-user"></strong>
-                        del departamento 
-                        <strong id="modal-dpto"></strong>.
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-calendar-check"></i> Fecha de Compra: 
-                        <strong id="modal-buy-date"></strong>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-clock-rotate-left"></i> Comprado hace: 
-                        <strong id="modal-buy-days-ago"></strong>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-calendar-check"></i> Fecha de Revisión: 
-                        <strong id="modal-date"></strong>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-clock-rotate-left"></i> Inventariado hace: 
-                        <strong id="modal-days-ago"></strong>
-                    </p>
-                    <hr>
-                    <h4><i class="fa-solid fa-circle-info"></i> Detalles del Estado</h4>
-                    <p>
-                        Funciona: <strong id="modal-funciona"></strong>
-                    </p>
-                    <div id="modal-details-content"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <footer>
-        <p>Datos sincronizados con Supabase.</p>
-    </footer>
+        <div class="table-container">
+            <div id="loading">
+                <i class="fa-solid fa-spinner fa-spin"></i> CARGANDO DATOS...
+            </div>
+            <table id="inventoryTable">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+    
+        
+    <footer>
+        <p>BY @DARMANDOALCALA. DATABASE POWERED BY SUPABASE</p>
+    </footer>
 
-    <script src="scripts/script_vista_inventario.js"></script>
-    
+    <script src="scripts/script_vista_inventario.js"></script>
+    
 </body>
 </html>

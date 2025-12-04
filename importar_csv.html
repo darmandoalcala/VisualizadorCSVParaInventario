@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV a Tabla - importar</title>
-    <link rel="stylesheet" href="styles/style_inventarioCSV.css">
+
+    <link rel="stylesheet" href="styles/01_styles.css"> 
+    <link rel="stylesheet" href="styles/style_vista_inventario.css">
+    <link rel="stylesheet" href="styles/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -12,11 +15,23 @@
 <body>
 
     <header>
-        <h1>VISUALIZADOR CSV</h1>
+        <div id="header-left-actions">
+            <a href="index.html" 
+                id="back-to-menu-btn" 
+                style="font-size: 1em;">
+                <i class="fa-solid fa-arrow-left"></i> 
+            </a>
+        </div>
+
+        <div id="header-titles">
+            <h1>VISUALIZADOR CSV</h1>
         <p>
             SELECCIONA UN ARCHIVO CSV Y LUEGO HAZ CLIC EN "CARGAR TABLA". HAZ CLIC EN CUALQUIER FILA PARA VER LOS DETALLES.
             <br/>HAZ CLIC EN "SUBIR TABLA A BASE DE DATOS" PARA ACTUALIZAR LA TABLA EN NUESTRA BD DE SUPABASE.
         </p>
+        </div>
+        
+        <div id="header-right-spacer"></div>
     </header>
 
     <main>
@@ -34,48 +49,6 @@
         </section>
     </main>
     
-    <div id="itemModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div id="modal-details">
-                <div id="modal-image-container"></div>
-                
-                <h2 id="modal-title"></h2>
-                <h3 id="modal-subtitle"></h3>
-                <div class="modal-body">
-                    <p>
-                        <i class="fa-solid fa-user"></i> PERTENECE A: 
-                        <strong id="modal-user"></strong>
-                        DEL DEPARTAMENTO 
-                        <strong id="modal-dpto"></strong>.
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-calendar-check"></i> FECHA DE COMPRA: 
-                        <strong id="modal-buy-date"></strong>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-clock-rotate-left"></i> COMPRADO HACE: 
-                        <strong id="modal-buy-days-ago"></strong>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-calendar-check"></i> FECHA DE INVENTARIADO: 
-                        <strong id="modal-date"></strong>
-                    </p>
-                    <p>
-                        <i class="fa-solid fa-clock-rotate-left"></i> INVENTARIADO HACE: 
-                        <strong id="modal-days-ago"></strong>
-                    </p>
-                    <hr>
-                    <h4><i class="fa-solid fa-circle-info"></i> DETALLES DEL ESTADO</h4>
-                    <p>
-                        FUNCIONA: <strong id="modal-funciona"></strong>
-                    </p>
-                    <div id="modal-details-content"></div>
-                    <a href="editar_equipo.html" id="editButton">EDITAR EQUIPO</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <footer>
         <p>BY @DARMANDOALCALA. DATABASE POWERED BY SUPABASE</p>
     </footer>
