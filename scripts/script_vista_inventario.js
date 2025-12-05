@@ -53,15 +53,6 @@ function renderTableFromObjects(data) {
             let className = '';
             let displayData = cellData;
 
-            if (key === 'MARCA') {
-                const brand = String(cellData).toUpperCase();
-                
-                // ASUME BRAND_IMAGES está disponible globalmente
-                const imagePath = BRAND_IMAGES[brand] || BRAND_IMAGES['DEFAULT'];
-                
-                displayData = `<img src="${imagePath}" class="brand-icon" alt="${cellData}"> ${cellData}`;
-            }
-
             if (key === 'FUNCIONA') {
                 const value = String(cellData).toUpperCase();
                 if (value === 'SI') {

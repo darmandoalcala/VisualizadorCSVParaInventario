@@ -22,7 +22,8 @@ input[type="file"]{border:1px solid #ccc;background-color:#fff;}
 td:nth-child(10){text-align:center;}
 .activo-si-icon{color:#27ae60;margin-right:5px;}
 .activo-no-icon{color:#c0392b;margin-right:5px;}
-.brand-icon{width:24px;height:24px;object-fit:contain;margin-right:8px;vertical-align:middle;border-radius:3px;border:1px solid #eee;}
+.detalles-presente{background-color:#fff3cd;font-style:italic;}
+
 footer{text-align:center;margin-top:40px;padding:10px;color:#7f8c8d;font-size:0.9em;}
 
 /*EXPORTAR CSV*/

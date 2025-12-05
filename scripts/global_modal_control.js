@@ -1,11 +1,14 @@
 const BRAND_IMAGES = {
-    'LENOVO': 'img/lenovo_logo.png',
-    'HP': 'img/hp_logo.png',
-    'DELL': 'img/dell_logo.png',
-    'ASUS': 'img/asus_logo.png',
-    'MSI': 'img/msi_logo.png',
-    'ACER': 'img/acer_logo.png',
-    'DEFAULT': 'img/default_logo.png'
+    'ACER': 'img/acer_logo.png',
+    'ASUS': 'img/asus_logo.png',
+    'DELL': 'img/dell_logo.png',
+    'HP': 'img/hp_logo.png',
+    'LENOVO': 'img/lenovo_logo.png',
+    'MOTOROLA': 'img/motorola_logo.png',
+    'MSI': 'img/msi_logo.png',
+    'SAMSUNG': 'img/samsung_logo.png',
+
+    'DEFAULT': 'img/default_logo.png'
 };
 
 function calculateDaysAgo(isoDateString) {
